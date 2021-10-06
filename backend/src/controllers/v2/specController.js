@@ -94,7 +94,8 @@ const scrapeSpecs = async (url) => {
 		const phone_image_url = $('.icon-pictures').parent('a').attr('href');
 		const phone_images = [];
 		if(phone_image_url) {
-			const html = await request.get(`${process.env.BASE_URL}/${phone_image_url}`);
+			// const html = await request.get(`${process.env.BASE_URL}/${phone_image_url}`);
+			const html = await request.get(`https://www.gsmarena.com/${phone_image_url}`);
 			$ = await cheerio.load(html);
 			$('#pictures-list').children('img').each((index, el) => {
 				let src = $(el).attr('src');
@@ -119,10 +120,11 @@ const scrapeSpecs = async (url) => {
 
 exports.index = async (req, res) => {
 	try {
-		const baseUrl = `${process.env.BASE_URL}`;
+		// const baseUrl = `${process.env.BASE_URL}`;
+		const baseUrl = `https://www.gsmarena.com/`;
 		const slug = req.params.slug;
 		const url = `${baseUrl}/${slug}.php`;
-
+		
 		const response = await scrapeSpecs(url);
 		response.specifications = response.scrapeResults;
 		delete response.scrapeResults;

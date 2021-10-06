@@ -13,9 +13,9 @@ mongoose.connect(
     },
     (err) => {
         if (!err) {
-            console.log("Connection successful");
+            console.log("DB Connection successful ✔️");
         } else {
-            console.log("No Connection");
+            console.log("DB Connection failed ❌");
         }
     }
 );

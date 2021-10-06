@@ -1,12 +1,14 @@
 import React from "react";
-import Button from "@mui/material/Button";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
+import BrandsPage from "./Pages/BrandsPage";
+
 function App() {
   return (
-    <div className="App">
-      <Button variant="contained">Contained</Button>
-      <HomePage />
-    </div>
+    <Router>
+      <Route path="/brands" component={BrandsPage} />
+      <Route path="/" component={HomePage} exact />
+    </Router>
   );
 }
 
