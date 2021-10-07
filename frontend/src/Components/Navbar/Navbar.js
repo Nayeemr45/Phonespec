@@ -8,17 +8,13 @@ import {
   Typography,
   InputBase,
   List,
-  Divider,
   ListItem,
-  ListItemIcon,
   ListItemText,
   Drawer,
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -96,6 +92,7 @@ const Navbar = () => {
       <List>
         {["Brands", "Latest", "News", "Contact"].map((text, index) => (
           <Link
+            key={text}
             to={`/${text.toLowerCase()}`}
             style={{ textDecoration: "none", color: "#000" }}
           >
@@ -123,7 +120,9 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{ backgroundColor: "#2f4649" }}> {/* #01424b */}
+        <AppBar position="static" style={{ backgroundColor: "#2f4649" }}>
+          {" "}
+          {/* #01424b */}
           <Toolbar>
             <IconButton
               size="large"
@@ -134,8 +133,9 @@ const Navbar = () => {
                 marginRight: 2,
                 display: isScreenMidium ? "block" : "none",
               }}
+              onClick={toggleDrawer("left", true)}
             >
-              <MenuIcon onClick={toggleDrawer("left", true)} />
+              <MenuIcon />
               <Drawer
                 anchor={"left"}
                 open={state["left"]}

@@ -18,20 +18,13 @@ const AllLatestPhonePage = () => {
   const theme = useTheme();
   let isScreenSmall = false;
   let isScreenSmall2 = false;
-  let isScreenMedium = false;
-  let isScreenMedium2 = false;
   if (useMediaQuery(theme.breakpoints.down("sm"))) {
     isScreenSmall = true;
   }
   if (useMediaQuery(theme.breakpoints.down("md"))) {
     isScreenSmall2 = true;
   }
-  if (useMediaQuery(theme.breakpoints.up("lg"))) {
-    isScreenMedium = true;
-  }
-  if (useMediaQuery(theme.breakpoints.down("lg"))) {
-    isScreenMedium2 = true;
-  }
+
   const LatestPhoneList = useSelector((state) => state.latestPhonesList);
   const { loading, error, latestPhone } = LatestPhoneList;
   const dispatch = useDispatch();
@@ -85,7 +78,7 @@ const AllLatestPhonePage = () => {
               : isScreenSmall2
               ? [0, 1, 2, 3]
               : [0, 1, 2, 3, 4, 5]
-            ).map(() => (
+            ).map((i) => (
               <Grid
                 item
                 xs={6}
@@ -96,6 +89,7 @@ const AllLatestPhonePage = () => {
                   display: "grid",
                   justifyContent: "center",
                 }}
+                key={i}
               >
                 <Skeleton
                   sx={{ bgcolor: "grey.400" }}
@@ -129,6 +123,7 @@ const AllLatestPhonePage = () => {
                     display: "flex",
                     justifyContent: "center",
                   }}
+                  key={latestPhone?.data.phones[item].slug}
                 >
                   <Card
                     sx={{

@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
 import { latestPhoneReducer } from "../Redux/Reducers/LatestPhoneReducers";
+import { newsReducer } from "../Redux/Reducers/NewsReducers";
 
 const reducer = combineReducers({
   latestPhonesList: latestPhoneReducer,
+  newsList: newsReducer,
 });
 
 const initialState = {};

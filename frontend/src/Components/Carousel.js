@@ -1,6 +1,6 @@
 import React from "react";
 import CarouselMui from "react-material-ui-carousel";
-import { Paper, Button, useMediaQuery } from "@mui/material";
+import { Paper, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Image1 from "../Assets/Images/1.jpg";
 import Image2 from "../Assets/Images/2.jpg";
