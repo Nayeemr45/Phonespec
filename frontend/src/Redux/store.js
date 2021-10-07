@@ -1,12 +1,10 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 
-// import {
-//   getAllUserReducer
-// } from "./reducers/UserReducers";
+import { latestPhoneReducer } from "../Redux/Reducers/LatestPhoneReducers";
 
 const reducer = combineReducers({
-//   userResetPass:userResetPassReducer,
+  latestPhonesList: latestPhoneReducer,
 });
 
 const initialState = {};
