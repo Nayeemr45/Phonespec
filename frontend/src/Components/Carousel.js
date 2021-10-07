@@ -6,6 +6,7 @@ import Image1 from "../Assets/Images/1.jpg";
 import Image2 from "../Assets/Images/2.jpg";
 import Image3 from "../Assets/Images/3.jpg";
 import Image4 from "../Assets/Images/4.jpg";
+import Image5 from "../Assets/Images/5.jpg";
 const Carousel = (props) => {
   let items = [
     {
@@ -19,6 +20,9 @@ const Carousel = (props) => {
     },
     {
       image: Image4,
+    },
+    {
+      image: Image5,
     },
   ];
 

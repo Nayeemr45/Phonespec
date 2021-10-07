@@ -9,12 +9,16 @@ import {
   ListItemText,
   Typography,
   useMediaQuery,
+  Card,
+  CardContent,
+  CardActionArea,
+  CardMedia,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import Carousel from "../Components/Carousel";
 import { Link } from "react-router-dom";
-
+import Image from "../Assets/Images/6.jpg";
 const useStyles = makeStyles({
   links: {
     textDecoration: "none",
@@ -33,10 +37,14 @@ const HomePage = () => {
   const classes = useStyles();
   const theme = useTheme();
   let isScreenSmall = false;
+  let isScreenSmall2 = false;
   let isScreenMedium = false;
   let isScreenMedium2 = false;
   if (useMediaQuery(theme.breakpoints.down("sm"))) {
     isScreenSmall = true;
+  }
+  if (useMediaQuery(theme.breakpoints.down("md"))) {
+    isScreenSmall2 = true;
   }
   if (useMediaQuery(theme.breakpoints.up("lg"))) {
     isScreenMedium = true;
@@ -56,7 +64,7 @@ const HomePage = () => {
             style={{
               minHeight: "100vh",
               height: "auto",
-              display: isScreenSmall ? "none" : "grid",
+              display: isScreenSmall2 ? "none" : "grid",
             }}
           >
             <Grid>
@@ -173,6 +181,44 @@ const HomePage = () => {
                 >
                   Latest Phones
                 </Typography>
+
+                <Grid container>
+                  {[0, 1, 2, 3, 4, 5, 6,].map(() => (
+                    <Grid
+                      item
+                      xs={6}
+                      sm={3}
+                      md={3}
+                      lg={2}
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <Card
+                        sx={{
+                          width: isScreenSmall ? "170px" : "170px",
+                          height: "18rem",
+                          boxShadow: "none",
+                        }}
+                      >
+                        <CardActionArea>
+                          <CardMedia
+                            component="img"
+                            height="230"
+                            image={Image}
+                            alt="green iguana"
+                          />
+                          <CardContent style={{ padding: "0.5rem" }}>
+                            <Typography
+                              align="center"
+                              style={{ fontSize: "1rem" }}
+                            >
+                              Samsung S21 ultra
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
               </Grid>
               <Grid
                 item
