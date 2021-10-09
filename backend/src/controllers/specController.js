@@ -1,6 +1,6 @@
 const request = require("request-promise");
 const cheerio = require("cheerio");
-const { json, errorJson } = require("../../utils/response");
+const { json, errorJson } = require("../utils/response");
 
 let brand;
 let phone_name;

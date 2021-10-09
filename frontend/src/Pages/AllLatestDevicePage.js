@@ -12,9 +12,10 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import { latestPhones } from "../Redux/Actions/LatestPhoneActions";
+import { getLatestDevice } from "../Redux/Actions/DeviceActions";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-const AllLatestPhonePage = () => {
+import Footer from "../Components/Footer/Footer";
+const AlllatestDevicePage = () => {
   const theme = useTheme();
   let isScreenSmall = false;
   let isScreenSmall2 = false;
@@ -25,12 +26,14 @@ const AllLatestPhonePage = () => {
     isScreenSmall2 = true;
   }
 
-  const LatestPhoneList = useSelector((state) => state.latestPhonesList);
-  const { loading, error, latestPhone } = LatestPhoneList;
+  const latestDeviceList = useSelector((state) => state.latestDeviceList);
+  const { loading, error, latestDevice } = latestDeviceList;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(latestPhones());
-  }, [dispatch]);
+    if (!latestDevice) {
+      dispatch(getLatestDevice());
+    }
+  }, [dispatch, latestDevice]);
 
   return (
     <div>
@@ -70,7 +73,7 @@ const AllLatestPhonePage = () => {
       >
         All Latest Phones
       </Typography>
-      <Grid container style={{ marginTop: 20 }}>
+      <Grid container style={{ marginTop: 20, minHeight: "100vh" }}>
         {loading || error ? (
           <>
             {(isScreenSmall
@@ -111,19 +114,20 @@ const AllLatestPhonePage = () => {
           </>
         ) : (
           <>
-            {latestPhone ? (
-              Object.keys(latestPhone.data?.phones).map((item) => (
+            {latestDevice ? (
+              Object.keys(latestDevice.data?.phones).map((item) => (
                 <Grid
                   item
                   xs={6}
                   sm={3}
+                  a
                   md={3}
                   lg={2}
                   style={{
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  key={latestPhone?.data.phones[item].slug}
+                  key={latestDevice?.data.phones[item].slug}
                 >
                   <Card
                     sx={{
@@ -132,24 +136,26 @@ const AllLatestPhonePage = () => {
                       boxShadow: "none",
                     }}
                   >
-                    <Link to={`/${latestPhone?.data.phones[item].slug}`}>
+                    <Link
+                      to={`/device/${latestDevice?.data.phones[item].slug}`}
+                    >
                       <CardMedia
                         component="img"
                         height="230"
-                        image={latestPhone?.data.phones[item].image}
+                        image={latestDevice?.data.phones[item].image}
                         alt="green iguana"
                       />
                     </Link>
                     <CardContent style={{ padding: "0.5rem" }}>
                       <Link
-                        to={`/${latestPhone?.data.phones[item].slug}`}
+                        to={`/device/${latestDevice?.data.phones[item].slug}`}
                         style={{
                           textDecoration: "none",
                           color: "#000",
                         }}
                       >
                         <Typography align="center" style={{ fontSize: "1rem" }}>
-                          {latestPhone?.data.phones[item].phone_name}
+                          {latestDevice?.data.phones[item].phone_name}
                         </Typography>
                       </Link>
                     </CardContent>
@@ -162,8 +168,9 @@ const AllLatestPhonePage = () => {
           </>
         )}
       </Grid>
+      <Footer />
     </div>
   );
 };
 
-export default AllLatestPhonePage;
+export default AlllatestDevicePage;

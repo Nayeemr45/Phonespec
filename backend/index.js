@@ -5,7 +5,6 @@ const cors = require("cors");
 require("./src/db/connection");
 
 const indexRoutes = require("./src/routes/index");
-const indexRoutesV2 = require("./src/routes/v2/index");
 const errorRoutes = require("./src/routes/error");
 
 app.use(cors());
@@ -20,7 +19,6 @@ app.use(cors());
 // });
 
 app.use("/", indexRoutes);
-app.use("/v2", indexRoutesV2);
 app.use('*', errorRoutes);
 
 // const PORT = process.env.PORT || 5000;

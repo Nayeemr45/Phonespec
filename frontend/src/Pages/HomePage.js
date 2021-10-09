@@ -19,7 +19,7 @@ import Carousel from "../Components/Carousel";
 import { Link } from "react-router-dom";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { latestPhones } from "../Redux/Actions/LatestPhoneActions";
+import { getLatestDevice } from "../Redux/Actions/DeviceActions";
 import { getNews } from "../Redux/Actions/NewsActions";
 import Footer from "../Components/Footer/Footer";
 import ScrollToTop from "react-scroll-to-top";
@@ -56,8 +56,8 @@ const HomePage = () => {
   if (useMediaQuery(theme.breakpoints.down("lg"))) {
     isScreenMedium2 = true;
   }
-  const LatestPhoneList = useSelector((state) => state.latestPhonesList);
-  const { loading, error, latestPhone } = LatestPhoneList;
+  const latestDeviceList = useSelector((state) => state.latestDeviceList);
+  const { loading, error, latestDevice } = latestDeviceList;
   const News = useSelector((state) => state.newsList);
   const { newsloading, newserror, news } = News;
 
@@ -70,9 +70,11 @@ const HomePage = () => {
   // }
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(latestPhones());
-    dispatch(getNews());
-  }, [dispatch]);
+    if (!latestDevice) {
+      dispatch(getLatestDevice());
+      dispatch(getNews());
+    }
+  }, [dispatch, latestDevice]);
 
   return (
     <div>
@@ -102,7 +104,7 @@ const HomePage = () => {
                 item
                 xs={12}
                 style={{
-                  backgroundColor: "grey",
+                  backgroundColor: "#416165",
                   color: "#fff",
                   height: "3rem",
                   display: "grid",
@@ -211,7 +213,7 @@ const HomePage = () => {
                         paddingTop: isScreenSmall ? "0.5rem" : "1rem",
                       }}
                     >
-                      Latest Phones
+                      Latest Devices
                     </Typography>
                   </Grid>
                   <Grid item xs={1}>
@@ -279,8 +281,8 @@ const HomePage = () => {
                     </>
                   ) : (
                     <>
-                      {latestPhone ? (
-                        Object.keys(latestPhone.data?.phones)
+                      {latestDevice ? (
+                        Object.keys(latestDevice.data?.phones)
                           .slice(0, 6)
                           .map((item) => (
                             <Grid
@@ -293,7 +295,7 @@ const HomePage = () => {
                                 display: "flex",
                                 justifyContent: "center",
                               }}
-                              key={latestPhone?.data.phones[item].slug}
+                              key={latestDevice?.data.phones[item].slug}
                             >
                               <Card
                                 sx={{
@@ -303,19 +305,19 @@ const HomePage = () => {
                                 }}
                               >
                                 <Link
-                                  to={`/${latestPhone?.data.phones[item].slug}`}
+                                  to={`/device/${latestDevice?.data.phones[item].slug}`}
                                 >
                                   <CardMedia
                                     component="img"
                                     width="120"
                                     height="230"
-                                    image={latestPhone?.data.phones[item].image}
+                                    image={latestDevice?.data.phones[item].image}
                                     alt="green iguana"
                                   />
                                 </Link>
                                 <CardContent style={{ padding: "0.5rem" }}>
                                   <Link
-                                    to={`/${latestPhone?.data.phones[item].slug}`}
+                                    to={`/device/${latestDevice?.data.phones[item].slug}`}
                                     style={{
                                       textDecoration: "none",
                                       color: "#000",
@@ -326,7 +328,7 @@ const HomePage = () => {
                                       style={{ fontSize: "1rem" }}
                                     >
                                       {
-                                        latestPhone?.data.phones[item]
+                                        latestDevice?.data.phones[item]
                                           .phone_name
                                       }
                                     </Typography>
@@ -439,6 +441,7 @@ const HomePage = () => {
                               sm={6}
                               md={6}
                               lg={4}
+                              xl={3}
                               style={{
                                 display: "flex",
                                 justifyContent: "center",
@@ -447,14 +450,14 @@ const HomePage = () => {
                             >
                               <Card
                                 sx={{
-                                  width: isScreenSmall ? "370px" : "auto",
-                                  height: "auto",
-                                  minHeight: "22rem",
-                                  // boxShadow: "none",
+                                  width: isScreenSmall ? "340px" : "370px",
+                                  height: "32rem",
+                                  minHeight: "28rem",
+                                  boxShadow: "none",
                                 }}
                               >
-                                <Grid container>
-                                  <Grid item xs={7} md={7}>
+                                {/* <Grid container>
+                                  <Grid item xs={7} md={7}> */}
                                     <Link to={`/${news?.data.news[item].slug}`}>
                                       <CardMedia
                                         component="img"
@@ -464,8 +467,8 @@ const HomePage = () => {
                                         alt="green iguana"
                                       />
                                     </Link>
-                                  </Grid>
-                                  <Grid item xs={5} md={5}>
+                                  {/* </Grid>
+                                  <Grid item xs={5} md={5}> */}
                                     <CardContent style={{ padding: "0.5rem" }}>
                                       <Link
                                         to={`/${news?.data.news[item].slug}`}
@@ -509,8 +512,8 @@ const HomePage = () => {
                                         </Typography>
                                       </Tooltip>
                                     </CardContent>
-                                  </Grid>
-                                </Grid>
+                                  {/* </Grid>
+                                </Grid> */}
                               </Card>
                             </Grid>
                           ))

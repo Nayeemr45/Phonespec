@@ -91,7 +91,7 @@ const NewsPage = ({ location }) => {
             paddingTop: isScreenSmall ? "0.5rem" : "1rem",
           }}
         >
-          All Latest news
+          All News
         </Typography>
         <Grid container style={{ marginTop: 20, minHeight: "100vh" }}>
           {newsloading || newserror ? (

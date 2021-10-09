@@ -1,6 +1,6 @@
 const request = require("request-promise");
 const cheerio = require("cheerio");
-const { json, errorJson } = require("../../utils/response");
+const { json, errorJson } = require("../utils/response");
 
 exports.index = async (req, res) => {
   try {
@@ -19,7 +19,7 @@ exports.index = async (req, res) => {
           phone_name,
           slug,
           image,
-          detail: req.protocol + "://" + req.get("host") + "/v2/" + slug,
+          detail: req.protocol + "://" + req.get("host") + "/" + slug,
         });
       });
 
@@ -69,7 +69,7 @@ exports.news = async (req, res) => {
         image,
         reviewDate,
         description,
-        detail: req.protocol + "://" + req.get("host") + "/v2/" + slug,
+        detail: req.protocol + "://" + req.get("host") + "/" + slug,
       });
     });
 
@@ -111,7 +111,7 @@ exports.topInterest = async (req, res) => {
             phone_name,
             slug,
             hits: parseInt(hits.replace(/,/g, "")),
-            detail: req.protocol + "://" + req.get("host") + "/v2/" + slug,
+            detail: req.protocol + "://" + req.get("host") + "/" + slug,
           });
         }
       });
@@ -150,7 +150,7 @@ exports.topFans = async (req, res) => {
             phone_name,
             slug,
             favorites: parseInt(favorites.replace(/,/g, "")),
-            detail: req.protocol + "://" + req.get("host") + "/v2/" + slug,
+            detail: req.protocol + "://" + req.get("host") + "/" + slug,
           });
         }
       });

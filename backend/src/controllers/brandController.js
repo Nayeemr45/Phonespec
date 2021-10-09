@@ -1,6 +1,6 @@
 const request = require("request-promise");
 const cheerio = require("cheerio");
-const { json, errorJson } = require("../../utils/response");
+const { json, errorJson } = require("../utils/response");
 
 exports.index = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ exports.index = async (req, res) => {
           brand_slug,
           device_count: parseInt(device_count.replace(" devices", "")),
           detail:
-          req.protocol + "://" + req.get("host") + "/v2/brands/" + brand_slug,
+          req.protocol + "://" + req.get("host") + "/brands/" + brand_slug,
         });
     });
     
@@ -66,7 +66,7 @@ exports.show = async (req, res) => {
           phone_name,
           slug,
           image,
-          detail: req.protocol + "://" + req.get("host") + "/v2/" + slug,
+          detail: req.protocol + "://" + req.get("host") + "/" + slug,
         });
       });
 

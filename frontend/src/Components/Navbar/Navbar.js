@@ -16,6 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
+import { Color } from "../../Theme/Color";
 
 const Navbar = () => {
   let isScreenMidium = false;
@@ -120,7 +121,7 @@ const Navbar = () => {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" style={{ backgroundColor: "#2f4649" }}>
+        <AppBar position="static" style={{ backgroundColor: Color.Primary }}>
           {" "}
           {/* #01424b */}
           <Toolbar>

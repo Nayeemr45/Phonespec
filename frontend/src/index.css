@@ -22,21 +22,19 @@ code {
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 12px 12px white;
   border: solid 3px transparent;
-  border-radius: 30px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  box-shadow: inset 0 0 12px 12px #2f4649;
+  box-shadow: inset 0 0 12px 12px #446368;
   border: solid 3px transparent;
-  border-radius: 30px;
+  border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  box-shadow: inset 0 0 10px 10px #4d7277;
+  box-shadow: inset 0 0 10px 10px #2f4649;
   border: solid 3px transparent;
-  border-radius: 15px;
 }
 /* ---------------------- Scrollbar end ---------------------- */
 

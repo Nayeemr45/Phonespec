@@ -4,6 +4,7 @@ import {
   NEWS_SUCCESS,
   NEWS_FAIL,
 } from "../Constants/NewsConstants";
+import { BaseUrl } from "../../Services/Constants";
 
 export const getNews = (page) => async (dispatch) => {
   try {
@@ -18,7 +19,7 @@ export const getNews = (page) => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      `http://localhost:5000/v2/news/${page}`,
+      `${BaseUrl}/news/${page}`,
       config
     );
 
